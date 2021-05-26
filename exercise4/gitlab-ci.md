@@ -144,7 +144,13 @@ W przypadku większych projektów, archiwizowanie całego katalogu `build` z reg
 
 **Uwaga 5:** Lista poleceń w części *script* jest wykonywana po kolei. Jeżeli którekolwiek z poleceń zakończy się błędem, wykonywanie zostanie przerwane.
 
-W tej fazie korzystać będziemy z artefaktów wyprodukowanych przez fazę *build*. Skrypt w tym przypadku polega na wykonaniu binarki z testami. Dodatkowo, możemy skorzystać z funkcji `reports`, która pobiera raport (np. w formacie jUnit) z wykonanych testów i prezentuje go razem z informacjami o zadaniu. Za wygenerowanie zawartości raportu odpowiada przełącznik `--gtest_output=xml:nazwa_pliku.xml`, natomiast sekcja `reports:` informuje Gitlaba, że raport w formacie jUnit będzie dostępny w podanym pliku.
+W tej fazie korzystać będziemy z artefaktów wyprodukowanych przez fazę *build*. Skrypt w tym przypadku polega na uruchomieniu narzędzia `ctest`, które wykonuje testy skonfigurowanie w systemie CMake. Dodatkowo, możemy skorzystać z funkcji `reports`, która pobiera raport (np. w formacie jUnit) z wykonanych testów i prezentuje go razem z informacjami o zadaniu. Za wygenerowanie zawartości raportu w frameworku GoogleTest odpowiada przełącznik `--gtest_output=xml:nazwa_pliku.xml`, natomiast sekcja `reports:` informuje Gitlaba, że raport w formacie jUnit będzie dostępny w podanym pliku.
+
+Narzędzie `ctest` pozwala na skonfigurowanie wcześniej zadanego zestawu testów, dzięki czemu nie trzeba ich ręcznie dodawać do konfiguracji CI. Dzięki temu projekt konfigurowany jest z jednego miejsca, co ogranicza możliwość omyłkowego stworzenia testu i nie dodania go do konfiguracji CI.
+
+W konfiguracji projektu do laboratorium flaga `--gtest_output=...` została dołączona do konfiguracji narzędzia `ctest`.
+
+Obecność katalogu `build/junit` i zawartych w nim plików można sprawdzić, kompilując projekt, następnie wykonując komendę `ctest --verbose`.
 
 Przykładowy kod zadania:
 
@@ -159,7 +165,7 @@ gtest:
   artifacts:
     when: always
     reports:
-      junit: junit/*.junit.xml
+      junit: build/junit/*.junit.xml
 ```
 
 **W ramach tego zadania należy skonfigurować fazę *test*, zawierającą dwa zadania (np. *test-exercise1* i *test-exercise2*), wykonujące zestaw testów z danej części projektu**
