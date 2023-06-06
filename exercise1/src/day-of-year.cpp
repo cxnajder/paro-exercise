@@ -1,28 +1,19 @@
 #include "day-of-year.hpp"
+#include <algorithm>
+#include <array>
+
+
+constexpr int FOURHUNDRED = 400;
+constexpr int ONEHUNDRED  = 100;
 
 int dayOfYear(int month, int dayOfMonth, int year) {
-    if (month == 2) {
-        dayOfMonth += 31;
-    } else if (month == 3) {
-        dayOfMonth += 59;
-    } else if (month == 4) {
-        dayOfMonth += 90;
-    } else if (month == 5) {
-        dayOfMonth += 31 + 28 + 31 + 30;
-    } else if (month == 6) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31;
-    } else if (month == 7) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30;
-    } else if (month == 8) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31;
-    } else if (month == 9) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31;
-    } else if (month == 10) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30;
-    } else if (month == 11) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31;
-    } else if (month == 12) {
-        dayOfMonth += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 31;
+    const std::array<int, 11> monthDays = {31,28,31,30,31,30,31,31,30,31,30};
+    for(int i = 0; i < month - 1; i++) {
+        dayOfMonth += monthDays.at(i);
+    }
+
+    if(month > 2 && year % 4 == 0 && (year % ONEHUNDRED != 0 || year % FOURHUNDRED == 0)) {
+        dayOfMonth++;
     }
     return dayOfMonth;
 }
