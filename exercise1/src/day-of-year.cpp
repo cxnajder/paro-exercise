@@ -1,7 +1,6 @@
 #include "day-of-year.hpp"
 #include <algorithm>
 #include <array>
-#include <iostream>
 #include <cassert>
 
 
