@@ -79,27 +79,27 @@ TEST(dayOfYear_Validation, Jan_Last_Day_Plus_One)
 
 
 //February Normal Year
-TEST(dayOfYear_Validation, Feb_Day_Minus_One)
+TEST(dayOfYear_Validation, Feb_Non_Leap_Day_Minus_One)
 {
     EXPECT_THROW(dayOfYear(2, -1, 2001), std::out_of_range);
 }
 
-TEST(dayOfYear_Validation, Feb_Day_Zero)
+TEST(dayOfYear_Validation, Feb_Non_Leap_Day_Zero)
 {
     EXPECT_THROW(dayOfYear(2, 0, 2001), std::out_of_range);
 }
 
-TEST(dayOfYear_Validation, Feb_Day_One)
+TEST(dayOfYear_Validation, Feb_Non_Leap_Day_One)
 {
     EXPECT_NO_THROW(dayOfYear(2, 1, 2001));
 }
 
-TEST(dayOfYear_Validation, Feb_Last_Day)
+TEST(dayOfYear_Validation, Feb_Non_Leap_Last_Day)
 {
     EXPECT_NO_THROW(dayOfYear(2, 28, 2001));
 }
 
-TEST(dayOfYear_Validation, Feb_Last_Day_Plus_One)
+TEST(dayOfYear_Validation, Feb_Non_Leap_Last_Day_Plus_One)
 {
     EXPECT_THROW(dayOfYear(2, 29, 2001), std::out_of_range);
 }
