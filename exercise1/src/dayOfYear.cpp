@@ -31,14 +31,19 @@ bool isDateValid(const int& month, const int& day, const int& year)
 {
     if (month < 1 || month > 12)
         return false;
+
     if (day < 1)
         return false;
+
     if(isLeapYear(year) && month==2 && day > 1 + monthDays[month-1])
         return false;
+
     else if(day > monthDays[month-1])
         return false;
+
     if (year < 0)
         return false;
+        
     return true;
 }
 
