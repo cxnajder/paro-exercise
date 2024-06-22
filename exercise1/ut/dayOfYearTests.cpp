@@ -21,6 +21,12 @@ TEST(DayOfYear, Leap_Year_On_Last_Day_Of_February)
 }
 
 
+TEST(DayOfYear, Leap_Year_On_1st_Day_Of_March)
+{
+    ASSERT_EQ(dayOfYear(4, 20, 2040), 111);
+}
+
+
 TEST(DayOfYear, January_1st_Is_Fitst_Day_Of_Year)
 {
     ASSERT_EQ(dayOfYear(1, 1, 2020), 1);
