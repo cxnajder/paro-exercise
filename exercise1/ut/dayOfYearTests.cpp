@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "day-of-year.hpp"
+#include "dayOfYear.hpp"
 
 struct DayOfYearTestSuite {};
 

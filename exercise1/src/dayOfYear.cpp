@@ -1,4 +1,4 @@
-#include "day-of-year.hpp"
+#include "dayOfYear.hpp"
 #include <algorithm>
 #include <array>
 #include <cassert>

@@ -1,7 +1,7 @@
 @echo ==================
 @echo Excercise 1 Tests:
 @echo ==================
-@build\exercise1\DayOfYearTest.exe --gtest_color=yes
+@build\exercise1\DayOfYearTests.exe --gtest_color=yes
 
 @echo ==================
 @echo Excercise 2 Tests:
