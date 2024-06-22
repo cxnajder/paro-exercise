@@ -2,6 +2,65 @@
 #include "dayOfYear.hpp"
 #include <stdexcept>
 
+// ==================== //
+// Leap Year Validation //
+// ==================== //
+
+// Leap Years: //
+TEST(isLeapYear_Validation, Leap_Year_0)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(0), true);
+}
+
+TEST(isLeapYear_Validation, Leap_Year_4)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(4), true);
+}
+
+TEST(isLeapYear_Validation, Leap_Year_400)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(400), true);
+}
+
+TEST(isLeapYear_Validation, Leap_Year_2000)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(2000), true);
+}
+
+TEST(isLeapYear_Validation, Leap_Year_2016)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(2016), true);
+}
+
+
+// Non Leap Years: //
+TEST(isLeapYear_Validation, Leap_Year_1)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(1), false);
+}
+
+TEST(isLeapYear_Validation, Leap_Year_100)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(100), false);
+}
+
+TEST(isLeapYear_Validation, Leap_Year_200)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(200), false);
+}
+
+TEST(isLeapYear_Validation, Leap_Year_1999)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(1999), false);
+}
+
+TEST(isLeapYear_Validation, Leap_Year_2006)
+{
+    ASSERT_EQ(dateUtils::isLeapYear(2006), false);
+}
+
+
+
 // =================== //
 // Functionality Tests //
 // =================== //
@@ -64,6 +123,7 @@ TEST(dayOfYear_Validation, Date_10_10_999999999)
 {
     ASSERT_EQ(dateUtils::dayOfYear(10, 10, 999999999), 283); // There is no upper limit for year value ¯\_(ツ)_/¯
 }
+
 
 
 // ================ //
