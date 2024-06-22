@@ -8,12 +8,12 @@
 const std::array<int, 12> monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 bool isDateValid(const int&, const int&, const int&);
-bool isLeapYear(const int&);
+bool dateUtils::isLeapYear(const int&);
 void validateDate(const int&, const int&, const int&);
 void validateDateVerbous(const int&, const int&, const int&);
 
 
-int dayOfYear(int month, int dayOfMonth, int year) {
+int dateUtils::dayOfYear(int month, int dayOfMonth, int year) {
 
     validateDate(month, dayOfMonth, year); // can throw
 
@@ -104,7 +104,7 @@ void validateDateVerbous(const int& month, const int& day, const int& year)
     }
 }
 
-bool isLeapYear(const int& year)
+bool dateUtils::isLeapYear(const int& year)
 {
     constexpr int leapYearException    = 400;
     constexpr int nonLeapYearException = 100;
