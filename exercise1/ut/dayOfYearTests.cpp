@@ -17,13 +17,13 @@ TEST(DayOfYear, Leap_Year)
 
 TEST(DayOfYear, Leap_Year_On_Last_Day_Of_February)
 {
-    ASSERT_EQ(dayOfYear(29, 2, 2040), 60);
+    ASSERT_EQ(dayOfYear(2, 29, 2040), 60);
 }
 
 
 TEST(DayOfYear, Leap_Year_On_1st_Day_Of_March)
 {
-    ASSERT_EQ(dayOfYear(1, 3, 2040), 61);
+    ASSERT_EQ(dayOfYear(3, 1, 2040), 61);
 }
 
 
