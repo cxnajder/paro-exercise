@@ -21,7 +21,7 @@ int dateUtils::dayOfYear(int month, int dayOfMonth, int year) {
         dayOfMonth += monthDays.at(i);
     }
 
-    if(month > 2 && isLeapYear(year)) {
+    if(month > 2 && dateUtils::isLeapYear(year)) {
         dayOfMonth++;
     }
     return dayOfMonth;
@@ -38,10 +38,10 @@ bool isDateValid(const int& month, const int& day, const int& year)
 
     if (month==2)
     {
-        if(isLeapYear(year) && day > 1 + monthDays[month-1]) 
+        if(dateUtils::isLeapYear(year) && day > 1 + monthDays[month-1]) 
             return false;
 
-        if(!isLeapYear(year) && day > monthDays[month-1])
+        if(!dateUtils::isLeapYear(year) && day > monthDays[month-1])
             return false;
     }
     
@@ -80,13 +80,13 @@ void validateDateVerbous(const int& month, const int& day, const int& year)
     }
     if (month==2)
     {
-        if(isLeapYear(year) && day > 1 + monthDays[month-1]) 
+        if(dateUtils::isLeapYear(year) && day > 1 + monthDays[month-1]) 
         {
             ss << "Day out of range " << 1 + monthDays[month-1] <<": "<<day<<";";
             throw std::out_of_range(ss.str());
         }
 
-        if(!isLeapYear(year) && day > monthDays[month-1])
+        if(!dateUtils::isLeapYear(year) && day > monthDays[month-1])
         {
             ss << "Day out of range "<< monthDays[month-1] <<": "<<day<<";";
             throw std::out_of_range(ss.str());
