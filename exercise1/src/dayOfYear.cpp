@@ -7,14 +7,14 @@
 
 const std::array<int, 12> monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-bool isDataValid(const int&, const int&, const int&);
+bool isDateValid(const int&, const int&, const int&);
 bool isLeapYear(const int&);
-void validateData(const int&, const int&, const int&);
+void validateDate(const int&, const int&, const int&);
 
 
 int dayOfYear(int month, int dayOfMonth, int year) {
 
-    validateData(month, dayOfMonth, year); // can throw
+    validateDate(month, dayOfMonth, year); // can throw
 
     for(int i = 0; i < month - 1; i++) {
         dayOfMonth += monthDays.at(i);
@@ -27,20 +27,24 @@ int dayOfYear(int month, int dayOfMonth, int year) {
 }
 
 
-bool isDataValid(const int& month, const int& day, const int& year)
+bool isDateValid(const int& month, const int& day, const int& year)
 {
     if (month < 1 || month > 12)
         return false;
-    if (day < 1 || (!isLeapYear(year) && day > monthDays[month-1]) || (isLeapYear(year) && day > 1 + monthDays[month-1]))
+    if (day < 1)
+        return false;
+    if(isLeapYear(year) && month==2 && day > 1 + monthDays[month-1])
+        return false;
+    if(day > monthDays[month-1])
         return false;
     if (year < 0)
         return false;
     return true;
 }
 
-void validateData(const int& month, const int& day, const int& year)
+void validateDate(const int& month, const int& day, const int& year)
 {
-    if(!isDataValid(month, day, year)) {
+    if(!isDateValid(month, day, year)) {
         std::stringstream ss;
         ss << "The date [month=" << month << ", day=" << day << ", year=" << year << "] is not in valid range";
         throw std::out_of_range(ss.str());
