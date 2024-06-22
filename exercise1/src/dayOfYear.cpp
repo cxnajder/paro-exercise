@@ -3,7 +3,7 @@
 #include <array>
 #include <cassert>
 #include <stdexcept>
-#include <sstream>
+#include <format>
 
 const std::array<int, 12> monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
@@ -40,11 +40,8 @@ bool isDataValid(const int& month, const int& day, const int& year)
 
 void validateData(const int& month, const int& day, const int& year)
 {
-    if(!isDataValid(month, day, year)) {
-        std::stringstream ss;
-        ss << "The date [month=" << month << ", day=" << day << ", year=" << year << "] is not in valid range";
-        throw std::out_of_range(ss.str());
-    }
+    if(!isDataValid(month, day, year))
+        throw std::out_of_range(std::format("The date [month={}, day={}, year={}] is not in valid range", month, day, year));
 }
 
 bool isLeapYear(const int& year)
