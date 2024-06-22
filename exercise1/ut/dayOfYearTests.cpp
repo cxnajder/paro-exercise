@@ -15,6 +15,12 @@ TEST(DayOfYear, Leap_Year)
 }
 
 
+TEST(DayOfYear, Leap_Year_On_Last_Day_Of_February)
+{
+    ASSERT_EQ(dayOfYear(29, 2, 2040), 60);
+}
+
+
 TEST(DayOfYear, January_1st_Is_Fitst_Day_Of_Year)
 {
     ASSERT_EQ(dayOfYear(1, 1, 2020), 1);
