@@ -2,91 +2,55 @@
 #include <algorithm>
 #include <array>
 #include <cassert>
-
-
-constexpr int leapYearException    = 400;
-constexpr int nonLeapYearException = 100;
+#include <stdexcept>
+#include <sstream>
 
 const std::array<int, 12> monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-void fixMonth(int &, int &);
-void fixDay(int &, int &, int &);
-
-void fixDate(int & month, int & dayOfMonth, int & year)
-{
-    /*
-        This function fixes date in case someone inputs invalid date like: 
-        -   dayOfYear(12, 32, 2020)
-        -   dayOfYear(13, 01, 2020)
-        -   dayOfYear(01, 00, 2021)
-        -   dayOfYear(01, -1, 2021)
-        -   dayOfYear(00, 01, 2021)
-        -   dayOfYear(-1, 01, 2021)
-
-    */
-
-    fixMonth(month, year);
-    fixDay(month, dayOfMonth, year);
-}
-
-void fixMonth(int & month, int & year)
-{
-    while( (1 > month || month > 12) ) 
-    {
-        if (month > 12) {
-            ++year;
-            month -=12;
-        }
-
-        if (month < 1) {
-            --year;
-            month +=12;
-        }
-    }
-}
-
-void fixDay(int & month, int & dayOfMonth, int & year) 
-{
-    do
-    {
-        assert (1 <= month && month <= 12); 
-        // fixDay can be called only if month between: <1, 12>
-
-        if (dayOfMonth < 1) {
-            --month;
-            fixMonth(month, year); // in case month was 1
-
-            assert (1 <= month && month <= 12);  //checks if fixMonth did work correctly
-            dayOfMonth += monthDays[month-1];
-        }
-
-        if (dayOfMonth > monthDays[month-1]) {
-
-            dayOfMonth -= monthDays[month-1];
-
-            ++month;
-            fixMonth(month, year); // in case month was 12
-        }
-
-    } while (1 > dayOfMonth || dayOfMonth > monthDays[month-1]);
-    
-}
+bool isDataValid(const int&, const int&, const int&);
+bool isLeapYear(const int&);
+void validateData(const int&, const int&, const int&);
 
 
 int dayOfYear(int month, int dayOfMonth, int year) {
 
-    fixDate(month, dayOfMonth, year);    
-
-    assert (1 <= month && month <= 12); 
-    assert (1 <= dayOfMonth && dayOfMonth <= monthDays[month-1]);
+    validateData(month, dayOfMonth, year); // can throw
 
     for(int i = 0; i < month - 1; i++) {
         dayOfMonth += monthDays.at(i);
     }
 
-    if(month > 2 && year % 4 == 0 &&
-       (year % nonLeapYearException != 0 || year % leapYearException == 0)) {
+    if(month > 2 && isLeapYear(year)) {
         dayOfMonth++;
     }
     return dayOfMonth;
+}
+
+
+bool isDataValid(const int& month, const int& day, const int& year)
+{
+    if (month < 1 || month > 12)
+        return false;
+    if (day < 1 || (!isLeapYear(year) && day > monthDays[month-1]) || (isLeapYear(year) && day > 1 + monthDays[month-1]))
+        return false;
+    if (year < 0)
+        return false;
+    return true;
+}
+
+void validateData(const int& month, const int& day, const int& year)
+{
+    if(!isDataValid(month, day, year)) {
+        std::stringstream ss;
+        ss << "The date [month=" << month << ", day=" << day << ", year=" << year << "] is not in valid range";
+        throw std::out_of_range(ss.str());
+    }
+}
+
+bool isLeapYear(const int& year)
+{
+    constexpr int leapYearException    = 400;
+    constexpr int nonLeapYearException = 100;
+
+    return (year % 4 == 0 && (year % nonLeapYearException != 0 || year % leapYearException == 0));
 }
