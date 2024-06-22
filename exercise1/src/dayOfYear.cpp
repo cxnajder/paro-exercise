@@ -35,7 +35,7 @@ bool isDateValid(const int& month, const int& day, const int& year)
         return false;
     if(isLeapYear(year) && month==2 && day > 1 + monthDays[month-1])
         return false;
-    if(day > monthDays[month-1])
+    else if(day > monthDays[month-1])
         return false;
     if (year < 0)
         return false;
