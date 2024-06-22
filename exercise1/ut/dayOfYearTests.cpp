@@ -1,31 +1,33 @@
 #include "gtest/gtest.h"
 #include "dayOfYear.hpp"
 
-struct DayOfYearTestSuite {};
+struct DayOfYear {};
 
-TEST(DayOfYearTestSuite, leapYear)
-{
-    ASSERT_EQ(dayOfYear(4, 20, 2040), 111);
-}
-
-TEST(DayOfYearTestSuite, normalYear)
+TEST(DayOfYear, Normal_Year)
 {
     ASSERT_EQ(dayOfYear(9, 6, 2137), 249);
 }
 
-TEST(DayOfYearTestSuite, January1stIsFitstDayOfYear)
+
+TEST(DayOfYear, Leap_Year)
+{
+    ASSERT_EQ(dayOfYear(4, 20, 2040), 111);
+}
+
+
+TEST(DayOfYear, January_1st_Is_Fitst_Day_Of_Year)
 {
     ASSERT_EQ(dayOfYear(1, 1, 2020), 1);
 }
 
 
-TEST(DayOfYearTestSuite, LastDayOfYear)
+TEST(DayOfYear, Last_Day_Of_Year)
 {
     ASSERT_EQ(dayOfYear(12, 31, 2021), 365);
 }
 
 
-TEST(DayOfYearTestSuite, LastDayOfLeapYear)
+TEST(DayOfYear, Last_Day_Of_Leap_Year)
 {
     ASSERT_EQ(dayOfYear(12, 31, 2020), 366);
 }
