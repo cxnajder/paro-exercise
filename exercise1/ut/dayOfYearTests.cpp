@@ -8,13 +8,19 @@
 
 TEST(dayOfYear_Functinality, Normal_Year)
 {
-    ASSERT_EQ(dayOfYear(9, 6, 2137), 249);
+    ASSERT_EQ(dayOfYear(4, 20, 2137), 110);
 }
 
 
 TEST(dayOfYear_Functinality, Leap_Year)
 {
     ASSERT_EQ(dayOfYear(4, 20, 2040), 111);
+}
+
+
+TEST(dayOfYear_Functinality, January_1st_Is_Fitst_Day_Of_Year)
+{
+    ASSERT_EQ(dayOfYear(1, 1, 2020), 1);
 }
 
 
@@ -30,12 +36,6 @@ TEST(dayOfYear_Functinality, Leap_Year_On_1st_Day_Of_March)
 }
 
 
-TEST(dayOfYear_Functinality, January_1st_Is_Fitst_Day_Of_Year)
-{
-    ASSERT_EQ(dayOfYear(1, 1, 2020), 1);
-}
-
-
 TEST(dayOfYear_Functinality, Last_Day_Of_Year)
 {
     ASSERT_EQ(dayOfYear(12, 31, 2021), 365);
@@ -46,6 +46,25 @@ TEST(dayOfYear_Functinality, Last_Day_Of_Leap_Year)
 {
     ASSERT_EQ(dayOfYear(12, 31, 2020), 366);
 }
+
+
+TEST(dayOfYear_Validation, Date_10_10_0)
+{
+    ASSERT_EQ(dayOfYear(10, 10, 0), 284);
+}
+
+
+TEST(dayOfYear_Validation, Date_10_10_1)
+{
+    ASSERT_EQ(dayOfYear(10, 10, 1), 283);
+}
+
+
+TEST(dayOfYear_Validation, Date_10_10_999999999)
+{
+    ASSERT_EQ(dayOfYear(10, 10, 999999999), 283); // There is no upper limit for year value ¯\_(ツ)_/¯
+}
+
 
 // ================ //
 // Validation Tests //
@@ -142,22 +161,152 @@ TEST(dayOfYear_Validation, Mar_Day_Minus_One)
     EXPECT_THROW(dayOfYear(3, -1, 2000), std::out_of_range);
 }
 
+
 TEST(dayOfYear_Validation, Mar_Day_Zero)
 {
     EXPECT_THROW(dayOfYear(3, 0, 2000), std::out_of_range);
 }
+
 
 TEST(dayOfYear_Validation, Mar_Day_One)
 {
     EXPECT_NO_THROW(dayOfYear(3, 1, 2000));
 }
 
+
 TEST(dayOfYear_Validation, Mar_Last_Day)
 {
     EXPECT_NO_THROW(dayOfYear(3, 31, 2000));
 }
 
+
 TEST(dayOfYear_Validation, Mar_Last_Day_Plus_One)
 {
     EXPECT_THROW(dayOfYear(3, 32, 2000), std::out_of_range);
+}
+
+
+// April
+TEST(dayOfYear_Validation, Apr_Day_Minus_One)
+{
+    EXPECT_THROW(dayOfYear(4, -1, 2000), std::out_of_range);
+}
+
+
+TEST(dayOfYear_Validation, Apr_Day_Zero)
+{
+    EXPECT_THROW(dayOfYear(4, 0, 2000), std::out_of_range);
+}
+
+
+TEST(dayOfYear_Validation, Apr_Day_One)
+{
+    EXPECT_NO_THROW(dayOfYear(4, 1, 2000));
+}
+
+
+TEST(dayOfYear_Validation, Apr_Last_Day)
+{
+    EXPECT_NO_THROW(dayOfYear(4, 30, 2000));
+}
+
+
+TEST(dayOfYear_Validation, Apr_Last_Day_Plus_One)
+{
+    EXPECT_THROW(dayOfYear(4, 31, 2000), std::out_of_range);
+}
+
+
+// ...
+
+// December
+TEST(dayOfYear_Validation, Dec_Day_Minus_One)
+{
+    EXPECT_THROW(dayOfYear(12, -1, 2000), std::out_of_range);
+}
+
+
+TEST(dayOfYear_Validation, Dec_Day_Zero)
+{
+    EXPECT_THROW(dayOfYear(12, 0, 2000), std::out_of_range);
+}
+
+
+TEST(dayOfYear_Validation, Dec_Day_One)
+{
+    EXPECT_NO_THROW(dayOfYear(12, 1, 2000));
+}
+
+
+TEST(dayOfYear_Validation, Dec_Last_Day)
+{
+    EXPECT_NO_THROW(dayOfYear(12, 31, 2000));
+}
+
+
+TEST(dayOfYear_Validation, Dec_Last_Day_Plus_One)
+{
+    EXPECT_THROW(dayOfYear(12, 32, 2000), std::out_of_range);
+}
+
+
+// Month value Validation
+TEST(dayOfYear_Validation, Month_Value_Minus_One)
+{
+    EXPECT_THROW(dayOfYear(-1, 10, 2000), std::out_of_range);
+}
+
+
+TEST(dayOfYear_Validation, Month_Value_Zero)
+{
+    EXPECT_THROW(dayOfYear(0, 10, 2000), std::out_of_range);
+}
+
+
+TEST(dayOfYear_Validation, Month_Value_One)
+{
+    EXPECT_NO_THROW(dayOfYear(1, 10, 2000));
+}
+
+
+TEST(dayOfYear_Validation, Month_Value_Twelve)
+{
+    EXPECT_NO_THROW(dayOfYear(12, 10, 2000));
+}
+
+
+TEST(dayOfYear_Validation, Month_Value_Thirteen)
+{
+    EXPECT_THROW(dayOfYear(13, 10, 2000), std::out_of_range);
+}
+
+
+// Year value Validation
+TEST(dayOfYear_Validation, Year_Value_Minus_One)
+{
+    EXPECT_THROW(dayOfYear(10, 10, -1), std::out_of_range);
+}
+
+
+TEST(dayOfYear_Validation, Year_Value_Zero)
+{
+    EXPECT_NO_THROW(dayOfYear(10, 10, 0));
+}
+
+
+TEST(dayOfYear_Validation, Year_Value_One)
+{
+    EXPECT_NO_THROW(dayOfYear(10, 10, 1));
+}
+
+
+TEST(dayOfYear_Validation, Year_Value_3000)
+{
+    EXPECT_NO_THROW(dayOfYear(10, 10, 3000));
+}
+
+
+TEST(dayOfYear_Validation, Year_Value_999999999)
+{
+    EXPECT_NO_THROW(dayOfYear(10, 10, 999999999));
 }
