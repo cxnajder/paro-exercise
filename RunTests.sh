@@ -1,3 +1,4 @@
+#!/bin/sh
 echo ==================
 echo Excercise 1 Tests:
 echo ==================
