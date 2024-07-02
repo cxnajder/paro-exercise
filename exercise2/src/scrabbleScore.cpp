@@ -21,7 +21,24 @@ namespace cxnajdersCode {
     }
 
     int countScrabbleScore(const std::string& word)
-    {
-        return word.size(); // FOR NOW
+    {    
+        int score = 0;
+
+        for(const auto& pair: cLettersAndPointsMap)
+        {
+            for(const char c: pair.first)
+            {
+                for(const char cw: word)
+                {
+                    if (c == cw)
+                     score += pair.second;
+                }
+            }
+        }
+        
+        return score;
+
+        // This function looks pretty awful
+        // Wonder if there's a better way like using letters ascii code
     }
 }
