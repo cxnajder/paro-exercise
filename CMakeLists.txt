@@ -14,3 +14,4 @@ include(CTest)
 
 add_subdirectory(external/googletest)
 add_subdirectory(exercise1)
+add_subdirectory(exercise2)
