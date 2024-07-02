@@ -10,8 +10,6 @@ add_compile_options(-Wall -Wextra -Wpedantic)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(CTest)
-
 add_subdirectory(external/googletest)
 add_subdirectory(exercise1)
 add_subdirectory(exercise2)
