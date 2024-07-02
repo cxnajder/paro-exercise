@@ -1,6 +1,7 @@
 #include "scrabbleScore.h"
 #include<map>
 #include <vector>
+#include <cctype>
 
 namespace cxnajdersCode {
     // I like to make my code very explicit and easy to read.
@@ -34,7 +35,7 @@ namespace cxnajdersCode {
                 
                 for(const char mapLetter: mapRecord.first)
                 {
-                    if (wordLetter == mapLetter)
+                    if (std::toupper(wordLetter) == mapLetter)
                     {
                         score += mapRecord.second;
                         currentLetterChecked = true;
