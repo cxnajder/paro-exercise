@@ -7,7 +7,7 @@ build\exercise1\DayOfYearTests.exe --gtest_color=yes
 echo ===================
 echo  Excercise 2 Tests 
 echo ===================
-echo NA
+build\exercise2\scrabbleScoreTests.exe --gtest_color=yes
 
 echo ===================
 echo  Excercise 3 Tests 
