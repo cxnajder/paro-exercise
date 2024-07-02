@@ -23,15 +23,14 @@ namespace cxnajdersCode {
     int countScrabbleScore(const std::string& word)
     {    
         int score = 0;
-
-        for(const auto& pair: cLettersAndPointsMap)
+        for(const char wordLetter: word)
         {
-            for(const char c: pair.first)
+            for(const auto& mapRecord: cLettersAndPointsMap)
             {
-                for(const char cw: word)
+                for(const char mapLetter: mapRecord.first)
                 {
-                    if (c == cw)
-                     score += pair.second;
+                    if (wordLetter == mapLetter)
+                        score += mapRecord.second;
                 }
             }
         }
