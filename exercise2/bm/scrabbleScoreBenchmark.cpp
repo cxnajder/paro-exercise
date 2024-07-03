@@ -16,6 +16,26 @@ static void cxnajderScrabbleBench_CABBAGE(benchmark::State &s)
         benchmark::DoNotOptimize(cxnajdersCode::countScrabbleScore("CABBAGE"));
     }
 }
+
+static void bronkoScrabbleBench_CABBAGE_optimal(benchmark::State &s)
+{
+    for (auto _ : s)
+    {
+        bronkosCode::countScrabbleScore("CABBAGE");
+    }
+}
+
+static void bronkoScrabbleBench_CABBAGE(benchmark::State &s)
+{
+    for (auto _ : s)
+    {
+        benchmark::DoNotOptimize(bronkosCode::countScrabbleScore("CABBAGE"));
+    }
+}
+
+
 BENCHMARK(cxnajderScrabbleBench_cabbage);
 BENCHMARK(cxnajderScrabbleBench_CABBAGE);
+BENCHMARK(bronkoScrabbleBench_CABBAGE_optimal);
+BENCHMARK(bronkoScrabbleBench_CABBAGE);
 BENCHMARK_MAIN();
