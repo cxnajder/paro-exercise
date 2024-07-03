@@ -1,11 +1,21 @@
 #include "benchmark/benchmark.h"
+#include "scrabbleScore.h"
 
-static void cxnajderScrabbleBench(benchmark::State &s)
+static void cxnajderScrabbleBench_cabbage(benchmark::State &s)
 {
     for (auto _ : s)
     {
-        //benchmark::DoNotOptimize();
+        benchmark::DoNotOptimize(cxnajdersCode::countScrabbleScore("cabbage"));
     }
 }
-BENCHMARK(cxnajderScrabbleBench);
+
+static void cxnajderScrabbleBench_CABBAGE(benchmark::State &s)
+{
+    for (auto _ : s)
+    {
+        benchmark::DoNotOptimize(cxnajdersCode::countScrabbleScore("CABBAGE"));
+    }
+}
+BENCHMARK(cxnajderScrabbleBench_cabbage);
+BENCHMARK(cxnajderScrabbleBench_CABBAGE);
 BENCHMARK_MAIN();
