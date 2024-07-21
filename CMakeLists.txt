@@ -6,7 +6,7 @@ enable_testing()
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_compile_options(-Wall -Wextra -Wpedantic)
+add_compile_options(-Wall -Wextra -Wpedantic -O3)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
